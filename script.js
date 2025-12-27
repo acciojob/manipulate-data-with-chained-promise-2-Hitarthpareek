@@ -13,6 +13,7 @@ const transform1 = (data)=>{
 	return new Promise((resolve)=>{
 		setTimeout(()=>{
 		 filteredData = data.filter(item=> item%2===0)
+		 ele.textContent = filteredData.join(", ");
 		 resolve(filteredData)
 		},1000)
 	})
@@ -23,6 +24,7 @@ const transform2 = (data)=>{
 		return new Promise((resolve)=>{
 		  setTimeout(()=>{
 			filteredData = data.map(item=> item*2)
+			ele.textContent = filteredData.join(", ");
 			resolve(filteredData)
 		},2000)
 })
@@ -31,9 +33,9 @@ const transform2 = (data)=>{
 async function start(){
 	const nums = await getNumbers();
 	const nums1 = await transform1(nums);
-	ele.textContent = nums1.join(", ");
+	
 	const nums2 = await transform2(nums1);
-	ele.textContent = nums2.join(", ");
+	
 }
 
 start()
