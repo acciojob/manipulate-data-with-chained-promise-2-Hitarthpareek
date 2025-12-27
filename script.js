@@ -1,43 +1,33 @@
-//your JS code here. If required.
-const ele = document.getElementById("output")
+const ele = document.getElementById("output");
 
 async function getNumbers() {
-    await new Promise((resolve) => {
-        setTimeout(resolve, 3000);
-    });
     return [1, 2, 3, 4];
 }
 
-const transform1 = (data)=>{
-	let filteredData = []
-	return new Promise((resolve)=>{
-		setTimeout(()=>{
-		 filteredData = data.filter(item=> item%2===0)
-		 ele.textContent = filteredData.join(", ");
-		 resolve(filteredData)
-		},1000)
-	})
-}
+const transform1 = (data) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const filteredData = data.filter(item => item % 2 === 0);
+            ele.textContent = filteredData.join(",");
+            resolve(filteredData);
+        }, 1000); // 1 second
+    });
+};
 
-const transform2 = (data)=>{
-	let filteredData = []
-		return new Promise((resolve)=>{
-		  setTimeout(()=>{
-			filteredData = data.map(item=> item*2)
-			ele.textContent = filteredData.join(", ");
-			resolve(filteredData)
-		},2000)
-})
-}
+const transform2 = (data) => {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            const transformedData = data.map(item => item * 2);
+            ele.textContent = transformedData.join(",");
+            resolve(transformedData);
+        }, 2000); // +2 seconds (total 3s)
+    });
+};
 
-async function start(){
-	const nums = await getNumbers();
-	const nums1 = await transform1(nums);
-	
-	const nums2 = await transform2(nums1);
-	
+async function start() {
+    const nums = await getNumbers();
+    const nums1 = await transform1(nums); // after 1s → 2,4
+    await transform2(nums1);              // after 3s → 4,8
 }
 
 start()
-
-
